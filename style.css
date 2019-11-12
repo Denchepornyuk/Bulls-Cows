@@ -55,3 +55,28 @@ body {
 .game__info {
   margin-top: 40px;
 }
+
+.error > input {
+  border-color: red;
+  position: relative;
+}
+
+.error::after {
+  content: "Only 4 unique numbers";
+  color: #ff0000;
+  position: absolute;
+  margin-top: 70px;
+  margin-left: -135px;
+  font-size: 12px;
+}
+
+.winner::after {
+  content: "YOU WON !!!";
+  color: #0fe40f;
+  font-size: 100px;
+  font-weight: bold;
+  position: absolute;
+  top: 200px;
+  left: 30%;
+  transform: rotate(-45deg);
+}
