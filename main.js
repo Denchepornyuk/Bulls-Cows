@@ -4,7 +4,8 @@ const gameButton = document.getElementById('button'),
       info = document.getElementById('info'),
       label = document.getElementById('game__label'),
       game = document.getElementById('game'),
-      generatedNumber = Math.floor(Math.random() * 10000).toString();
+      generatedNumber = Math.floor(Math.random() * 10000).toString(),
+      tryList = document.getElementById('tryList');
 
 
 gameButton.addEventListener('click', () => {
@@ -13,6 +14,7 @@ gameButton.addEventListener('click', () => {
   const gameResult = bullsAndCows(generatedNumber, enteredNumber);
   showResult(gameResult);
   showComputerNumber(generatedNumber, enteredNumber);
+  addNewShot(enteredNumber);
 
   if (generatedNumber === enteredNumber) {
     game.classList.add('winner');
@@ -57,4 +59,8 @@ function showError() {
 
 function hideError() {
   label.classList.remove('error'); 
+}
+
+function addNewShot(enteredNumber) {
+  tryList.innerHTML += `<span class="shot">${enteredNumber}</span>`
 }

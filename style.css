@@ -80,3 +80,15 @@ body {
   left: 30%;
   transform: rotate(-45deg);
 }
+
+.game__try-list {
+  float: right;
+  margin-right: 300px;
+  margin-top: -200px;
+}
+
+.shot {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
