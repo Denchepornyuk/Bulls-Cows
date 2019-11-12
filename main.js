@@ -13,8 +13,8 @@ gameButton.addEventListener('click', () => {
 
   const gameResult = bullsAndCows(generatedNumber, enteredNumber);
   showResult(gameResult);
-  showComputerNumber(generatedNumber, enteredNumber);
-  addNewShot(enteredNumber);
+  const computerNumber = showComputerNumber(generatedNumber, enteredNumber);
+  addNewShot(enteredNumber, computerNumber);
 
   if (generatedNumber === enteredNumber) {
     game.classList.add('winner');
@@ -51,6 +51,7 @@ function showComputerNumber(generatedNumber, enteredNumber) {
   });
 
   info.innerHTML = `<span class="game__computer">Computer number: ${number.join('')}</span>`;
+  return number.join('');
 }
 
 function showError() {
@@ -61,6 +62,8 @@ function hideError() {
   label.classList.remove('error'); 
 }
 
-function addNewShot(enteredNumber) {
-  tryList.innerHTML += `<span class="shot">${enteredNumber}</span>`
+function addNewShot(enteredNumber, computerNumber) {
+  tryList.innerHTML += `<span class="shot">
+                          ${enteredNumber} - ${computerNumber}
+                        </span>`
 }
