@@ -4,30 +4,32 @@ const gameButton = document.getElementById('button'),
       info = document.getElementById('info'),
       label = document.getElementById('game__label'),
       game = document.getElementById('game'),
-      generatedNumber = Math.floor(Math.random() * 10000).toString(),
-      tryList = document.getElementById('tryList');
+      tryList = document.getElementById('tryList'),
+      generatedNumber = randomNumber(),
+      buttonNewGame = document.getElementById('newGame');
 
+let count = 0;
 
 gameButton.addEventListener('click', () => {
   const enteredNumber = gameInput.value;
 
-  const gameResult = bullsAndCows(generatedNumber, enteredNumber);
-  showResult(gameResult);
-  const computerNumber = showComputerNumber(generatedNumber, enteredNumber);
-  addNewShot(enteredNumber, computerNumber);
+  bullsAndCows(generatedNumber, enteredNumber);
 
   if (generatedNumber === enteredNumber) {
     game.classList.add('winner');
+    buttonNewGame.style.display = 'block';
+    showComputerNumber(generatedNumber, enteredNumber);
   }
 });
 
 function bullsAndCows(generatedNumber, enteredNumber) {
   const countBullsAndCows = { 'bulls': 0, 'cows': 0 };
-  if ([...new Set(enteredNumber)].length !== 4) {
+  if ([...new Set(enteredNumber)].length !== 4 || enteredNumber.length !== 4) {
     showError();
     return '';
   } else {
     hideError();
+    count++;
   }
 
   for (let i = 0; i < 4; i++) {
@@ -37,6 +39,9 @@ function bullsAndCows(generatedNumber, enteredNumber) {
       countBullsAndCows['cows']++;
     }
   }
+
+  showResult(countBullsAndCows);
+  addNewShot(enteredNumber, count);
   return countBullsAndCows;
 }
 
@@ -64,6 +69,19 @@ function hideError() {
 
 function addNewShot(enteredNumber, computerNumber) {
   tryList.innerHTML += `<span class="shot">
-                          ${enteredNumber} - ${computerNumber}
+                          ${count}. ${enteredNumber}
                         </span>`
 }
+
+function randomNumber () {
+  let generatedNumber = '';
+  while(generatedNumber.length !== 4){
+      let n = Math.floor(Math.random()*10) + 1;
+      if(!generatedNumber.includes(n)) {
+        generatedNumber += n;
+      };
+  }
+  return generatedNumber;
+}
+
+buttonNewGame.addEventListener('click' , () => window.location.reload())
